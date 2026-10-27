@@ -51,7 +51,7 @@ export const settings: SiteSettings = {
     postalCode: "44600",
     country: "Nepal",
     mapUrl: "https://maps.app.goo.gl/7TP3Bv2yPSGGaB9M7",
-    mapEmbedUrl: "https://www.google.com/maps?q=OOPS!%20Nepal%2C%20Dhumbarahi%20Pipalbot%2C%20Kathmandu&output=embed",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14127.186038073702!2d85.32000998715822!3d27.72356850000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1900375f72d5%3A0x4de18aa9a02160f!2sOOPS*21%20NEPAL!5e0!3m2!1sen!2snp!4v1793082244450!5m2!1sen!2snp",
   },
   socials: [
     { platform: "instagram", url: "https://www.instagram.com/oopsinnepal", handle: "@oopsinnepal" },

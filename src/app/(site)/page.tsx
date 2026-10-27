@@ -115,7 +115,7 @@ export default async function HomePage() {
               </ButtonLink>
             </Reveal>
           </div>
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:auto-rows-[17rem] lg:grid-cols-4">
+          <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:auto-rows-[minmax(19rem,auto)] lg:grid-cols-4">
             {featured.map((attraction, i) => (
               <Reveal
                 as="li"
