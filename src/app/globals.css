@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   OOPS! Nepal design tokens — Space theme
+   Main: sea blue + black. Accents (from the logo): orange, yellow, green, pink, purple.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --color-space-950: #03050b;
+  --color-space-900: #060a14;
+  --color-space-850: #09101e;
+  --color-space-800: #0c1527;
+  --color-space-700: #142038;
+  --color-space-600: #1d2c4a;
+
+  --color-sea-100: #d6f6ff;
+  --color-sea-200: #a8ecff;
+  --color-sea-300: #5fd3f5;
+  --color-sea-400: #22b8e6;
+  --color-sea-500: #0096c7;
+  --color-sea-600: #0077b6;
+  --color-sea-700: #025e8c;
+  --color-sea-800: #03466a;
+  --color-sea-900: #03304a;
+
+  --color-orange: #ff6a13;
+  --color-yellow: #ffc300;
+  --color-green: #6cbf2a;
+  --color-green-deep: #2f7d17;
+  --color-pink: #ff2d87;
+  --color-purple: #8b3dff;
+
+  --color-ink: #f2f6ff;
+  --color-muted: #a3b6cc;
+  --color-subtle: #6f839c;
+
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee var(--marquee-duration, 60s) linear infinite;
+  --animate-marquee-reverse: marquee-reverse var(--marquee-duration, 60s) linear infinite;
+  --animate-float: float 8s var(--ease-fluid) infinite alternate;
+  --animate-twinkle: twinkle 3.6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+  @keyframes marquee-reverse {
+    from { transform: translate3d(-50%, 0, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+  @keyframes float {
+    from { transform: translate3d(0, -8px, 0) rotate(-1deg); }
+    to { transform: translate3d(0, 8px, 0) rotate(1deg); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+  }
+
+  /* Lenis (smooth scrolling) needs the browser's own smooth scrolling switched off. */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+  .lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+
+  body {
+    background-color: var(--color-space-950);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  a, button, [role="button"], input, select, textarea, label, summary {
+    touch-action: manipulation;
+  }
+
+  html {
+    -webkit-tap-highlight-color: rgb(34 184 230 / 0.18);
+  }
+
+  select option {
+    background-color: var(--color-space-900);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background: var(--color-sea-400);
+    color: var(--color-space-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sea-300);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img, video {
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* All headings & sub-headings: bold + uppercase (client brief). */
+  .heading {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.98;
+  }
+
+  .heading-xl { font-size: clamp(2.6rem, 7vw, 6.4rem); }
+  .heading-lg { font-size: clamp(2.1rem, 5vw, 4.4rem); }
+  .heading-md { font-size: clamp(1.6rem, 3.2vw, 2.75rem); line-height: 1.04; }
+  .heading-sm { font-size: clamp(1.15rem, 1.8vw, 1.45rem); line-height: 1.15; letter-spacing: 0; }
+
+  /* Highlighted words in titles: one solid brand colour (no gradient text). */
+  .text-gradient { color: var(--color-sea-300); }
+  .text-gradient-warm { color: var(--color-yellow); }
+
+  /* Cards follow the logo: a thick coloured outline and a hard offset "extrusion" shadow in a partner colour.
+     --accent / --accent-edge are set by the cycle below (or inline for category cards). */
+  .bezel {
+    border-radius: 1.25rem;
+  }
+  .bezel-core {
+    border-radius: 1.25rem;
+    background: var(--color-space-850);
+    border: 2px solid var(--accent, var(--color-sea-400));
+    box-shadow: 6px 6px 0 var(--accent-edge, var(--color-purple));
+    overflow: hidden;
+    transition: box-shadow 0.25s var(--ease-fluid);
+  }
+  .bezel:is(a, :has(> a)):hover > .bezel-core,
+  a.bezel:hover > .bezel-core {
+    box-shadow: 9px 9px 0 var(--accent-edge, var(--color-purple));
+  }
+
+  /* Brand colour order follows the logo letters: O orange, O green, P purple, S pink, ! blue, then yellow. */
+  :is(ul, ol) > :nth-child(6n + 1), :not(li, [data-tilt]) > .bezel:nth-child(6n + 1) { --accent: var(--color-orange); --accent-edge: var(--color-yellow); }
+  :is(ul, ol) > :nth-child(6n + 2), :not(li, [data-tilt]) > .bezel:nth-child(6n + 2) { --accent: var(--color-green); --accent-edge: var(--color-green-deep); }
+  :is(ul, ol) > :nth-child(6n + 3), :not(li, [data-tilt]) > .bezel:nth-child(6n + 3) { --accent: var(--color-purple); --accent-edge: var(--color-sea-400); }
+  :is(ul, ol) > :nth-child(6n + 4), :not(li, [data-tilt]) > .bezel:nth-child(6n + 4) { --accent: var(--color-pink); --accent-edge: var(--color-orange); }
+  :is(ul, ol) > :nth-child(6n + 5), :not(li, [data-tilt]) > .bezel:nth-child(6n + 5) { --accent: var(--color-sea-400); --accent-edge: var(--color-purple); }
+  :is(ul, ol) > :nth-child(6n + 6), :not(li, [data-tilt]) > .bezel:nth-child(6n + 6) { --accent: var(--color-yellow); --accent-edge: var(--color-orange); }
+
+  .glass {
+    background: rgb(6 10 20 / 0.62);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.09), 0 20px 60px -20px rgb(0 0 0 / 0.6);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .hairline {
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+
+  /* Scroll reveal (driven by <Reveal>). Content stays visible if JavaScript never runs. */
+  /* GSAP (see <Reveal>) takes over once the page has loaded. */
+  .js [data-reveal="out"] {
+    opacity: 0;
+    transform: translate3d(0, 2.5rem, 0);
+  }
+  .js [data-reveal="stagger"] > * {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+.page-enter {
+  animation: page-in 0.55s var(--ease-fluid) both;
+}
+@keyframes page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Fixed nebula glow behind everything (cheap: one fixed layer, no scrolling repaints). */
+.nebula {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 50% at 50% 0%, rgb(0 119 182 / 0.14), transparent 70%),
+    var(--color-space-950);
+}
+
+/* Static star field fallback (reduced motion / no WebGL). */
+.stars-fallback {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 70%, #cfefff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 35%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 75% 15%, #e3d4ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 85% 65%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 20% 90%, #a8ecff 50%, transparent 51%),
+    radial-gradient(1px 1px at 65% 85%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 45% 55%, #fff 50%, transparent 51%);
+  background-size: 420px 420px;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js [data-reveal="out"],
+  .js [data-reveal="stagger"] > * {
+    opacity: 1;
+    transform: none;
+  }
+}
