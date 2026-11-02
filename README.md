@@ -3,6 +3,8 @@
 Next.js 16 (App Router, Cache Components) · Tailwind CSS 4 · Supabase (database + storage) · built-in admin login.
 Every piece of content — text, prices, offers, photos, videos, menus, SEO — is stored in Supabase and edited from `/admin`.
 
+> **Staff:** the full admin user guide is in [`docs/userguide/`](docs/userguide/README.md).
+
 ## Run it
 
 ```bash

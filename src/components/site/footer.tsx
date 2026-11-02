@@ -121,6 +121,19 @@ export function Footer({ settings, logo, year }: { settings: SiteSettings; logo:
             ))}
           </ul>
         </div>
+
+        <p className="mt-6 flex flex-wrap items-center justify-center gap-x-1.5 border-t border-white/[0.07] pt-6 text-center text-xs text-subtle">
+          Powered by
+          <a
+            href="https://kodedristi.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Kodedristi Software (opens in a new tab)"
+            className="inline-flex min-h-9 items-center font-semibold text-muted transition-colors hover:text-sea-300"
+          >
+            Kodedristi Software
+          </a>
+        </p>
       </Container>
     </footer>
   );
